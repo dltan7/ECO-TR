@@ -1,4 +1,4 @@
-> [new] A colab demo [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/) of ECO-TR is provided here.
+> [new] A colab demo [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wpTQxwxs2xwSDWqE40t1Uw__MCILS6ND?usp=sharing) of ECO-TR is provided here.
 
 ### [Project Page](https://dltan7.github.io/ecotr/)
 
@@ -8,7 +8,7 @@
 
 ## Abstract
 
-![pipeline](D:\code\ECO-TR\project_page\ecotr_page\ecotr\static\pics\pipeline.png)
+![pipeline](./assets/pipeline.png)
 
 We propose an efficient structure named Efficient Correspondence Transformer ECO-TR by finding correspondences in a coarse-to-fine manner, which significantly improves the efficiency of functional model methods. To achieve this, multiple transformer blocks are stage-wisely connected to gradually refine the predicted coordinates upon a shared multi-scale feature extraction network. All the correspondences are predicted within a single feed-forward pass, given a pair of images and for arbitrary query coordinates. We further propose an adaptive query-clustering strategy and an uncertainty-based outlier detection module to cooperate with the proposed framework for faster and better predictions. Experiments on various sparse and dense matching tasks demonstrate the superiority of our method in both efficiency and effectiveness against existing functional matching methods.
 
@@ -16,7 +16,7 @@ We propose an efficient structure named Efficient Correspondence Transformer ECO
 
 Clone the repo:
 
-> git clone https:////github.com/dltan7/ECO-TR.git
+> git clone https://github.com/dltan7/ECO-TR.git
 
 download model weights from [here](https://drive.google.com/file/d/1-1r7DQRHWvJDQfMkDs6m2a97YqzLCJvI/view?usp=sharing)
 
