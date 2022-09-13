@@ -1,0 +1,72 @@
+import os
+from yacs.config import CfgNode as CN
+_CN = CN()
+
+# path
+basepath = os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..')
+
+# ECO-TR model 
+_CN.ECOTR = CN()
+_CN.ECOTR.BACKBONE = 'resnet50_fpn'
+_CN.ECOTR.TRANSFORMER_TYPE= 'fully'
+_CN.ECOTR.HIDDEN_DIM = 256
+_CN.ECOTR.DILATION= False 
+_CN.ECOTR.DILATION_FINE= False 
+_CN.ECOTR.DROPOUT= 0.1
+_CN.ECOTR.NHEADS= 8 
+_CN.ECOTR.DIM_FEEDFORWARD = 256 
+_CN.ECOTR.LAYER_IDX=[0,3]
+_CN.ECOTR.ENC_LAYERS=3
+_CN.ECOTR.DEC_LAYERS=3 
+_CN.ECOTR.POSITION_EMBEDDING='lin_sine' 
+_CN.ECOTR.WINDOW_SIZE=17 
+_CN.ECOTR.WINDOW_SIZE_FINE=13 
+_CN.ECOTR.SAFE_RATIO=0.6 
+_CN.ECOTR.LOAD_WEIGHTS_PATH=os.path.join(basepath,'ckpt/checkpoint.pth.tar')
+_CN.ECOTR.NUM_ANCHORS_PER_BATCH_TEST_MID=192 
+_CN.ECOTR.NUM_ANCHORS_PER_BATCH_TEST_FINE=192 
+_CN.ECOTR.KMEANS_ITER_NUM=100 
+_CN.ECOTR.MINIBATCHSIZE= 64
+
+_CN.ECOTR.ENGINE = CN()
+_CN.ECOTR.ENGINE.DEVICE = 'cuda:0' 
+_CN.ECOTR.ENGINE.ASPECT_RATIOS = [1.0, 1.0]
+_CN.ECOTR.ENGINE.MAX_LEN = 840
+_CN.ECOTR.ENGINE.MAX_KPTS_NUM = 400 
+_CN.ECOTR.ENGINE.CYCLE_THRESH = [40, 20, 10] 
+
+# training 
+_CN.TRAIN= CN()
+_CN.TRAIN.MID_BATCH_SIZE= 8
+_CN.TRAIN.FINE_BATCH_SIZE= 8 
+_CN.TRAIN.NUM_ANCHORS_PER_BATCH= 4 
+_CN.TRAIN.NUM_ANCHORS_PER_BATCH=512 
+
+# dataset
+_CN.DATASET= CN()
+_CN.DATASET.NAME='megadepth' 
+_CN.DATASET.SHUFFLE_DATA=True
+_CN.DATASET.USE_RAM=False
+_CN.DATASET.INFO_LEVEL='rgbd'
+_CN.DATASET.SCENE_FILE=None
+_CN.DATASET.WORKERS=0
+_CN.DATASET.CROP_CAM='crop_center_and_resize'
+_CN.DATASET.NUM_KP=200 
+_CN.DATASET.KP_POOL=100 
+_CN.DATASET.COARSE_TRAIN_KP_NUM=256
+_CN.DATASET.MID_TRAIN_KP_NUM=256
+_CN.DATASET.NN_METHOD= 'overlapping'
+_CN.DATASET.POOL_SIZE= 20 
+_CN.DATASET.K_SIZE= 1 
+
+# loss
+_CN.TRAIN.COARSE_LOSS_WEIGHT=1.0 
+_CN.TRAIN.MID_LOSS_WEIGHT=1.0
+_CN.TRAIN.COARSE_MARGIN_L2_LOSS= False 
+
+
+def get_cfg_defaults():
+    """Get a yacs CfgNode object with default values for my_project."""
+    # Return a clone so that the defaults will not be altered
+    # This is for the "local variable" use pattern
+    return _CN.clone()
