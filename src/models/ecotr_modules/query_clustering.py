@@ -96,7 +96,7 @@ def generate_fine_patch_inference_kmeans(
 
     # Calibrate centroids slightly
     patch_queries_centroids = (anchors * h).long() / h
-    patch_corrs_centroids = (anchors * h).long() / h
+    patch_corrs_centroids = (corrs_centroids * h).long() / h
     
     # normalize patch queries and corrs and mask out outsiders
     patch_queries = (patch_queries - patch_queries_centroids.unsqueeze(2).expand_as(patch_queries)) / (window_size / h) + 0.5
