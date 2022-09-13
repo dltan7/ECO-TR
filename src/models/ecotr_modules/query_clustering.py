@@ -2,7 +2,7 @@ import pdb
 import torch
 import torch.nn.functional as F 
 from einops import rearrange
-#from pykeops.torch import LazyTensor
+from pykeops.torch import LazyTensor
 
 EPS = 1e-6 # avoid nan
 @torch.no_grad()
@@ -11,10 +11,10 @@ def KMeans(x, K=10, Niter=100):
     B, N, D = x.shape  # Number of samples, dimension of the ambient space
     c = x[:, :K, :].clone()  # Simplistic initialization for the centroids
 
-    # x_i = LazyTensor(x.view(B, N, 1, D))  # (B, N, 1, D) samples
-    # c_j = LazyTensor(c.view(B, 1, K, D))  # (B, 1, K, D) centroids
-    x_i = x.view(B, N, 1, D).clone()  # (B, N, 1, D) samples
-    c_j = c.view(B, 1, K, D).clone()  # (B, 1, K, D) centroids
+    x_i = LazyTensor(x.view(B, N, 1, D))  # (B, N, 1, D) samples
+    c_j = LazyTensor(c.view(B, 1, K, D))  # (B, 1, K, D) centroids
+    # x_i = x.view(B, N, 1, D).clone()  # (B, N, 1, D) samples
+    # c_j = c.view(B, 1, K, D).clone()  # (B, 1, K, D) centroids
 
     # K-means loop:
     # - x  is the (B, N, D) point cloud,
